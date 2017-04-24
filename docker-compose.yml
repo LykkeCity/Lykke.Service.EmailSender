@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  lykke.service.emailsender:
+    image: lykke.service.emailsender
+    build:
+      context: ./src/Lykke.Service.EmailSender
+      dockerfile: Dockerfile
