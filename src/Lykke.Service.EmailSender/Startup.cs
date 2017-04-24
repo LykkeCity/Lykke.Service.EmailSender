@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AzureStorage;
@@ -44,6 +47,7 @@ namespace Lykke.Service.EmailSender
                 // Add framework services.
                 services.AddMvc();
 
+                // Add swagger generator
                 services.AddSwaggerGen(x => { x.SwaggerDoc(ApiVersion, new Info { Title = ApiTitle, Version = ApiVersion }); });
 
                 // Load settings
@@ -60,13 +64,11 @@ namespace Lykke.Service.EmailSender
                     log = new LogToAll(log, logToTable);
                 }
 
-                // Create the container builder.
-                var builder = new ContainerBuilder();
-
                 // Register dependencies, populate the services from
                 // the collection, and build the container. If you want
                 // to dispose of the container at the end of the app,
                 // be sure to keep a reference to it as a property or field.
+                var builder = new ContainerBuilder();
 
                 builder.RegisterInstance(
                         new AzureTableStorage<PartnerSmtpSettings>(settings.EmailSenderSettings.Partners.ConnectionString,
@@ -74,7 +76,7 @@ namespace Lykke.Service.EmailSender
                     .As<INoSQLTableStorage<PartnerSmtpSettings>>()
                     .SingleInstance();
                 builder.Populate(services);
-                this.ApplicationContainer = builder.Build();
+                ApplicationContainer = builder.Build();
 
                 // Create the IServiceProvider based on the container.
                 return new AutofacServiceProvider(ApplicationContainer);
@@ -89,7 +91,8 @@ namespace Lykke.Service.EmailSender
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
+
             app.UseSwagger();
             app.UseSwaggerUI(x =>
             {

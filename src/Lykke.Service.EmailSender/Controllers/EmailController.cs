@@ -11,7 +11,7 @@ using MimeKit;
 
 namespace Lykke.Service.EmailSender.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class EmailController : Controller
     {
         private readonly INoSQLTableStorage<PartnerSmtpSettings> _partnerSmtpSettings;
@@ -22,7 +22,6 @@ namespace Lykke.Service.EmailSender.Controllers
         }
 
         [HttpPost]
-        [RequireHttps]
         public async Task Send(EmailSendRequest request)
         {
             if (!TryValidateModel(request))
@@ -38,9 +37,11 @@ namespace Lykke.Service.EmailSender.Controllers
             message.From.Add(new MailboxAddress(Encoding.UTF8, partnerSmtpSettings.FromDisplayName, partnerSmtpSettings.FromEmailAddress));
             message.To.Add(new MailboxAddress(Encoding.UTF8, request.To.DisplayName, request.To.EmailAddress));
 
-            var bodyBuilder = new BodyBuilder();
-            bodyBuilder.TextBody = request.Message.TextBody;
-            bodyBuilder.HtmlBody = request.Message.HtmlBody;
+            var bodyBuilder = new BodyBuilder
+            {
+                TextBody = request.Message.TextBody,
+                HtmlBody = request.Message.HtmlBody
+            };
 
             if (null != request.Message.Attachments)
                 foreach (var attachment in request.Message.Attachments)
