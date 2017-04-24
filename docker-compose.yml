@@ -3,6 +3,13 @@ version: '2'
 services:
   lykke.service.emailsender:
     image: lykke.service.emailsender
+    container-name: lykke.service.emailsender
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "SettingsUrl=${SETTINGSURL}"
+    ports:
+      - "80:${LISTENPORT}"
+
     build:
       context: ./src/Lykke.Service.EmailSender
       dockerfile: Dockerfile
