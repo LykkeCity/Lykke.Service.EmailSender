@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AzureStorage;
-using Lykke.WebServices.EmailSender.Models;
-using Lykke.WebServices.EmailSender.Settings;
+using Lykke.Service.EmailSender.Models;
+using Lykke.Service.EmailSender.Settings;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 
-namespace Lykke.WebServices.EmailSender.Controllers
+namespace Lykke.Service.EmailSender.Controllers
 {
     [Route("api/[controller]")]
     public class EmailController : Controller

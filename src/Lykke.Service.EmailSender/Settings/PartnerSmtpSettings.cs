@@ -1,6 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 
-namespace Lykke.WebServices.EmailSender.Settings
+namespace Lykke.Service.EmailSender.Settings
 {
     public class PartnerSmtpSettings : TableEntity
     {

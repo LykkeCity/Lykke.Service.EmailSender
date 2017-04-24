@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lykke.WebServices.EmailSender.Models
+namespace Lykke.Service.EmailSender.Models
 {
     public class EmailMessage
     {

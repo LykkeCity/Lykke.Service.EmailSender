@@ -1,4 +1,4 @@
-﻿namespace Lykke.WebServices.EmailSender.Settings
+﻿namespace Lykke.Service.EmailSender.Settings
 {
     public class AppSettings
     {
