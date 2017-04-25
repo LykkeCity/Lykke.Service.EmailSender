@@ -14,10 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.Service.EmailSender",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{EB29C1DF-DC28-47EE-AEEA-7F8FEBB6BE00}"
 	ProjectSection(SolutionItems) = preProject
-		docker\.env = docker\.env
 		docker\app-publish.sh = docker\app-publish.sh
 		docker\docker-build.sh = docker\docker-build.sh
-		docker\docker-deliver.sh = docker\docker-deliver.sh
+		docker\docker-publish.sh = docker\docker-publish.sh
 	EndProjectSection
 EndProject
 Global

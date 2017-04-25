@@ -83,7 +83,7 @@ namespace Lykke.Service.EmailSender
             }
             catch (Exception ex)
             {
-                log.WriteFatalErrorAsync(nameof(Startup), nameof(EmailSender), nameof(ConfigureServices), ex, DateTime.UtcNow);
+                log.WriteFatalErrorAsync(nameof(EmailSender), nameof(Startup), nameof(ConfigureServices), ex, DateTime.UtcNow).Wait();
                 throw;
             }
         }
